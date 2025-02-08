@@ -1,0 +1,17 @@
+version: "3.7"
+services:
+  terraform:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: terraform
+    container_name: terraform
+    secrets:
+      - id_ed25519
+    command:
+      - "apply"
+    restart: no
+
+secrets:
+  id_ed25519:
+    file: /root/.ssh/id_ed25519
