@@ -14,22 +14,22 @@ servers:
   children:
     control_main:
     control:
+    storage:
     dev:
-    test:
     prod:
 
 workers:
   children:
+    storage:
     dev:
-    test:
     prod:
 
 auth:
   children:
     control_main:
     control:
+    storage:
     dev:
-    test:
     prod:
   vars:
     ansible_ssh_user: ubuntu
