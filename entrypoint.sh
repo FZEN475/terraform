@@ -25,14 +25,16 @@ function init_terraform() {
 function plan() {
   terraform plan
   terraform output -json | jq -r 'del(.[]|."sensitive") | del(.[]|."type") | walk(if type == "object" then with_entries( if .key == "value" then .key = "hosts" | .value = (.value | map({(.) : null} )  | add) else . end ) else . end) ' > /source/inventory.json
-  scp -r /source/inventory.json 192.168.2.1:/mnt/nas/secrets/ >&/dev/null
+  terraform output -json | jq
+  scp -Or /source/inventory.json 192.168.2.1:/mnt/nas/secrets/
+  scp -Or /source/main.tf 192.168.2.1:/mnt/nas/secrets/
 }
 
 function apply() {
   terraform apply -auto-approve
   terraform output -json | jq -r 'del(.[]|."sensitive") | del(.[]|."type") | walk(if type == "object" then with_entries( if .key == "value" then .key = "hosts" | .value = (.value | map({(.) : null} )  | add) else . end ) else . end) ' > /source/inventory.json
-  scp -r /source/terraform.tfstate 192.168.2.1:/mnt/nas/secrets/ >&/dev/null
-  scp -r /source/inventory.json 192.168.2.1:/mnt/nas/secrets/ >&/dev/null
+  scp -Or /source/terraform.tfstate 192.168.2.1:/mnt/nas/secrets/
+  scp -Or /source/inventory.json 192.168.2.1:/mnt/nas/secrets/
 }
 
 init_ssh_access
