@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   terraform:
-    image: ghcr.io/fzen475/terraform-image:dev
+    image: ghcr.io/fzen475/terraform-image:latest
     container_name: terraform
     env_file: ./.env
     environment:
