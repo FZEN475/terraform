@@ -8,7 +8,7 @@ output "control" {
   value = [for names in module.control : names.hostname ]
 }
 output "storage" {
-  description = "Имена test серверов."
+  description = "Имена storage серверов."
 
   value = [for names in module.storage : names.hostname ]
 }
