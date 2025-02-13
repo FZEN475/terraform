@@ -13,7 +13,7 @@ SWARM и Служебные поды Kubernetes
 
 ### Storage group
 Поды баз данных и объектных хранилищ.  
-Данные периодически сбрасываются на внешний NAS.  
+Данные периодически сбрасываются на внешний NAS.
 
 | Дополнительно | vCPU | vMemory(Gi) | vDisk(Gi) | 
 |:--------------|:-----|:------------|:----------|
@@ -33,18 +33,14 @@ SWARM и Служебные поды Kubernetes
 |:--------------|:-----|:------------|:----------|
 | prod01        | 8    | 6           | 50        |
 
-## Подготовка
-### Требования
+## Dependency
 | Дополнительно | Значение                                                    | Comment |
 |:--------------|:------------------------------------------------------------|:--------|
 | Образ         | [terraform](https://github.com/FZEN475/terraform-image.git) |         |
 
-## Установка
-Запустить docker-compose.yml
+### Examples
+<details><summary> variables.tf </summary>
 
-### Дополнительно
-
-variables.tf
 ```terraform
 variable "esxi_hostname" {
   default = "esxi"
@@ -62,7 +58,10 @@ variable "esxi_password" {
   default = "xxxxxxxx"
 }
 ```
-inventory.json
+</details>
+
+<details><summary> inventory.json  </summary>
+
 ```json
 {
   "control": {
@@ -93,3 +92,4 @@ inventory.json
   }
 }
 ```
+</details>
