@@ -1,0 +1,20 @@
+version: "3.7"
+services:
+  terraform:
+    image: ghcr.io/fzen475/terraform-image:latest
+    container_name: terraform
+    env_file: ./.env
+    environment:
+      TERRAFORM_REPO: ${TERRAFORM_REPO}
+      GIT_EXTRA_PARAM: ${GIT_EXTRA_PARAM}
+      ESXI_SERVER: ${ESXI_SERVER}
+      SECURE_SERVER: ${SECURE_SERVER}
+      SECURE_PATH: ${SECURE_PATH}
+      APPLY: ${APPLY}
+    secrets:
+      - id_ed25519
+    restart: no
+
+secrets:
+  id_ed25519:
+    file: /root/.ssh/id_ed25519
