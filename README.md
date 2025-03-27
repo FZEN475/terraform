@@ -7,7 +7,7 @@ SWARM и Служебные поды Kubernetes
 | Name      | vCPU | vMemory(Gi) | vDisk(Gi) | 
 |:----------|:-----|:------------|:----------|
 | control01 | 8    | 6           | 50        |
-| control02 | 8    | 6           | 50        |
+| control02 | 8    | 6           | 100       |
 | control03 | 8    | 6           | 50        |
 
 ### Storage group

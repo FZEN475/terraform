@@ -19,7 +19,7 @@ variable "control" {
     "host1" = {
       hostname = "control02"
       mac = "00:50:56:A1:68:24"
-      disk_store = "datastore0"
+      disk_store = "datastore3"
       disk_size = "50"
     },
     "host2" = {
