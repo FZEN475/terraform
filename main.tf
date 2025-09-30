@@ -19,14 +19,14 @@ variable "control" {
     "host1" = {
       hostname = "control02"
       mac = "00:50:56:A1:68:24"
-      disk_store = "datastore0"
-      disk_size = "50"
+      disk_store = "datastore3"
+      disk_size = "200"
     },
     "host2" = {
       hostname = "control03"
       mac = "00:50:56:A0:5F:05"
       disk_store = "datastore1"
-      disk_size = "50"
+      disk_size = "80"
     }
   }
 
@@ -46,53 +46,49 @@ variable "storage" {
       hostname = "storage01"
       mac = "00:50:56:A2:AA:43"
       disk_store = "datastore1"
-      disk_size = "50"
-    }
-  }
-
-
-}
-
-
-variable "dev" {
-  description = "Dev"
-  type = map(object({
-    hostname = string
-    mac = string
-    disk_store = string
-    disk_size = string
-  }))
-  default = {
-    "host1" = {
-      hostname = "dev01"
-      mac = "00:50:56:A1:08:2A"
-      disk_store = "datastore1"
-      disk_size = "50"
-    }
-  }
-
-
-}
-
-
-
-variable "prod" {
-  description = "Prod"
-  type = map(object({
-    hostname = string
-    mac = string
-    disk_store = string
-    disk_size = string
-  }))
-  default = {
-    "host1" = {
-      hostname = "prod01"
-      mac = "00:50:56:AC:E7:39"
-      disk_store = "datastore1"
-      disk_size = "50"
+      disk_size = "80"
     }
   }
 }
+
+
+# variable "dev" {
+#   description = "Dev"
+#   type = map(object({
+#     hostname = string
+#     mac = string
+#     disk_store = string
+#     disk_size = string
+#   }))
+#   default = {
+#     "host1" = {
+#       hostname = "dev01"
+#       mac = "00:50:56:A1:08:2A"
+#       disk_store = "datastore1"
+#       disk_size = "50"
+#     }
+#   }
+# }
+
+
+
+# variable "prod" {
+#   description = "Prod"
+#   type = map(object({
+#     hostname = string
+#     mac = string
+#     disk_store = string
+#     disk_size = string
+#   }))
+#   default = {
+#     "host1" = {
+#       hostname = "prod01"
+#       mac = "00:50:56:AC:E7:39"
+#       disk_store = "datastore1"
+#       disk_size = "50"
+#     }
+#   }
+# }
 
 module "control_main" {
   source = "./modules/base"
@@ -100,8 +96,8 @@ module "control_main" {
   mac = "00:50:56:a1:b1:c2"
 
   disk_store = "datastore0"
-  disk_size = "50"
-  mem_size = "6144"
+  disk_size = "80"
+  mem_size = "9216"
 }
 
 module "control" {
@@ -112,7 +108,7 @@ module "control" {
 
   disk_store = each.value.disk_store
   disk_size = each.value.disk_size
-  mem_size = "6144"
+  mem_size = "9216"
 }
 
 module "storage" {
@@ -123,27 +119,27 @@ module "storage" {
 
   disk_store = each.value.disk_store
   disk_size = each.value.disk_size
-  mem_size = "6144"
+  mem_size = "9216"
 }
 
-module "dev" {
-  source = "./modules/base"
-  for_each = var.dev
-  vm_hostname = each.value.hostname
-  mac = each.value.mac
-
-  disk_store = each.value.disk_store
-  disk_size = each.value.disk_size
-  mem_size = "6144"
-}
-
-module "prod" {
-  source = "./modules/base"
-  for_each = var.prod
-  vm_hostname = each.value.hostname
-  mac = each.value.mac
-
-  disk_store = each.value.disk_store
-  disk_size = each.value.disk_size
-  mem_size = "6144"
-}
+# module "dev" {
+#   source = "./modules/base"
+#   for_each = var.dev
+#   vm_hostname = each.value.hostname
+#   mac = each.value.mac
+#
+#   disk_store = each.value.disk_store
+#   disk_size = each.value.disk_size
+#   mem_size = "6144"
+# }
+#
+# module "prod" {
+#   source = "./modules/base"
+#   for_each = var.prod
+#   vm_hostname = each.value.hostname
+#   mac = each.value.mac
+#
+#   disk_store = each.value.disk_store
+#   disk_size = each.value.disk_size
+#   mem_size = "6144"
+# }

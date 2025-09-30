@@ -12,13 +12,19 @@ output "storage" {
 
   value = [for names in module.storage : names.hostname ]
 }
-output "dev" {
-  description = "Имена dev серверов."
+# output "dev" {
+#   description = "Имена dev серверов."
+#
+#   value = [for names in module.dev : names.hostname ]
+# }
+# output "prod" {
+#   description = "Имена prod серверов."
+#
+#   value = [for names in module.prod : names.hostname ]
+# }
 
-  value = [for names in module.dev : names.hostname ]
-}
-output "prod" {
-  description = "Имена prod серверов."
-
-  value = [for names in module.prod : names.hostname ]
+# Статический блок для workflow
+output "workflow" {
+  description = "Физическая машина под workflow"
+  value = ["workflow01"]
 }
